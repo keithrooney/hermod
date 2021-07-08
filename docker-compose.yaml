@@ -2,7 +2,20 @@ version: '3.9'
 services:
   web:
     build: web/.
-  nginx:
-    build: nginx/.
+  alb:
+    build: alb/.
     ports:
       - "8080:8080"
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: hermod
+      MYSQL_USER: hermod
+      MYSQL_USER_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
+    hostname: mysql
+    volumes:
+      - ~/mysql:/var/lib/mysql
