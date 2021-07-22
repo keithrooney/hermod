@@ -3,7 +3,7 @@ services:
   web:
     build: web/.
     environment:
-      MYSQL_URL: "mysql://root:password@db:3306/hermod"
+      MYSQL_URL: "mysql://hermod:password@db:3306/hermod"
     depends_on:
       - db
     restart: on-failure
@@ -15,10 +15,10 @@ services:
     image: mysql:8
     environment:
       MYSQL_DATABASE: hermod
-      MYSQL_USER: hermod
-      MYSQL_USER_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: hermod
+      MYSQL_PASSWORD: password
+      MYSQL_USER_HOST: '%'
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - /tmp/mysql:/var/lib/mysql
